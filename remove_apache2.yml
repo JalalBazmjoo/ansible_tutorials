@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: update repository
+    apt:
+	  update_cache: yes
+  - name: remove apache2 package
+    apt: 
+      name: apache2
+	    state: absent   #----> ### For remove apache2
