@@ -4,8 +4,38 @@
   tasks:
   - name: update repository
     apt:
-	  update_cache: yes
+	    update_cache: yes
+    when: ansible_distribution == "Ubuntu"  # Condition for distribute
+#   when: ansible_distribution in ["Ubuntu", "Debian"]
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "8.2"
   - name: install apache2 package
     apt: 
       name: apache2
 	    state: latest
+    when: ansible_distribution == "Ubuntu"
+  - name: add php support for apache
+    apt:
+      name: libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+---
+# For CentOS Distribute
+- hosts: all
+  become: true
+  tasks:
+  - name: update repository
+    dnf:
+	    update_cache: yes
+    when: ansible_distribution == "CentOS"  # Condition for distribute
+#   when: ansible_distribution in ["CentOS", "Fedora"]
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "8.2"
+  - name: install httpd package
+    dnf: 
+      name: httpd
+	    state: latest
+    when: ansible_distribution == "CentOS"
+  - name: add php support for apache
+    dnf:
+      name: php
+      state: latest
+    when: ansible_distribution == "CentOS"

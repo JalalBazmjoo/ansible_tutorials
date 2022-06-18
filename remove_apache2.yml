@@ -8,4 +8,4 @@
   - name: remove apache2 package
     apt: 
       name: apache2
-	    state: absent   #----> ### For remove apache2
+	    state: absent   # For remove apache2
