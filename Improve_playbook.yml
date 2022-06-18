@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install apache2 and php and update 
+    apt:       
+      name: 
+      - apache2
+      - libapache2-mod-php
+      update_cache: yes
+	    state: latest
+    when: ansible_distribution == "Ubuntu"
+  
+  - name: install httpd and php and update
+    dnf: 
+      name: 
+      - httpd
+      - php
+      update_cache: yes
+	    state: latest
+    when: ansible_distribution == "CentOS" 

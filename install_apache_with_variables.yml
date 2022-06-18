@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install apache2 and php and update 
+    apt:       
+      name: 
+      - "{{ apache_package }}"   # variables define in "inventory_with_variables" file
+      - "{{ php_package }}"
+      state: latest
+      update_cache: yes

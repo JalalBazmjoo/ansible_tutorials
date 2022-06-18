@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install apache2 and php and update 
+    package:                     # package is module in ansible thet is a generic package manager, base on distribute use package manager (dnf for centos and apt for debian)       
+      name: 
+      - "{{ apache_package }}"
+      - "{{ php_package }}"
+      state: latest
+      update_cache: yes
